@@ -1,0 +1,79 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: bohdan
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: firstName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: department
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phoneNumber
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 1.1
+      author: bohdan
+      changes:
+  - createTable:
+      tableName: department
+      columns:
+        - column: department_id
+          type: BIGINT
+          autoIncrement: true
+          constraints:
+            primaryKey: true
+            nullable: false
+        - column:
+            name: city
+            type: varchar(50)
+            constraints:
+              nullable: false
+        - column:
+            name: number
+            type: INT
+            constraints:
+              nullable: false
+        - column:
+            name: adress
+            type: varchar(100)
+            constraints:
+              nullable: false
+        - column:
+            name: weight_limit
+            type: INT
