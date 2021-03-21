@@ -1,15 +1,16 @@
 package com.learning.hermes.persistance.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import liquibase.datatype.core.TinyIntType;
 
-@Entity(name = "users")
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue
-    private int id;
+    @Column
+    private Integer id;
 
     @Column(nullable = false, length = 20)
     private String type;
@@ -20,17 +21,22 @@ public class User {
     @Column(nullable = false, length = 50)
     private String lastName;
 
-    @Column(nullable = false, length = 50)
-    private String department;
+    @ManyToOne
+    @JoinColumn(name = "departmentId")
+    private Department department;
 
     @Column(nullable = false, length = 20)
-    private int phoneNumber;
+    private Integer phoneNumber;
 
     @Column(nullable = false)
     private String password;
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getType() {
@@ -57,19 +63,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
-    public int getPhoneNumber() {
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
