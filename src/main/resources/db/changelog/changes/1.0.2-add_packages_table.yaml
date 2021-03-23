@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/changelog-master.yaml
+  - changeSet:
+      id: 3
+      author: bohdan
+      changes:
+        - createTable:
+            tableName: packages
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ttn
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cost
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: weight
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: fragility
+                  type: BIGINT
+
+              - column:
+                  name: fee
+                  type: BIGINT
+
+              - column:
+                  name: status
+                  type: varchar(20)
+
+              - column:
+                  name: department_from
+                  type: BIGINT
+              - column:
+                  name: department_to
+                  type: BIGINT
+              - column:
+                  name: sender_phone
+                  type: varchar(50)
+
+              - column:
+                  name: receiver_phone
+                  type: varchar(50)
+
+              - column:
+                  name: created_date
+                  type: BIGINT
+
+              - column:
+                  name: deliver_date
+                  type: BIGINT
+
+              - column:
+                  name: received_date
+                  type: BIGINT

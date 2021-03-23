@@ -2,7 +2,6 @@ package com.learning.hermes.persistance.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "Departmets")
@@ -10,8 +9,8 @@ public class Department {
 
     @Id
     @GeneratedValue
-    @Column
-    private Integer id;
+    @Column(name = "id")
+    private Integer departmentId;
 
     @Column
     private String city;
@@ -28,12 +27,12 @@ public class Department {
     @OneToMany(mappedBy = "department")
     Collection<User> user;
 
-    public Integer getId() {
-        return id;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getCity() {
