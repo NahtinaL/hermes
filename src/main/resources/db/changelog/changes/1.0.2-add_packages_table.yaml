@@ -1,5 +1,5 @@
 databaseChangeLog:
-  - logicalFilePath: db/changelog/changelog-master.yaml
+  - logicalFilePath: db/changelog/changelog-master.xml
   - changeSet:
       id: 3
       author: bohdan
