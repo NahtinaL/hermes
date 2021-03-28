@@ -15,13 +15,12 @@ public class UserController {
     @GetMapping
     public String getUser() {
         UserDto userTest = new UserDto();
-        userTest.setId(1);
         userTest.setFirstName("BohdanTest");
         userTest.setLastName("Bochulia");
         userTest.setPassword("nonEcriptedpassword");
-        userTest.setPhoneNumber("063456789764");
+        userTest.setPhoneNumber("8888567844444");
         userTest.setType("creator");
-        userTest.setDepartmentId("123");
+        userTest.setDepartmentId(1);
 
         userService.createUser(userTest);
         return "get User was called";

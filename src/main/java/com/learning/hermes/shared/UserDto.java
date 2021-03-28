@@ -1,5 +1,6 @@
 package com.learning.hermes.shared;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,6 +16,6 @@ public class UserDto implements Serializable {
     private String phoneNumber;
     private String password;
     private String encryptedPassword;
-    private String departmentId;
+    private Integer departmentId;
 
 }
