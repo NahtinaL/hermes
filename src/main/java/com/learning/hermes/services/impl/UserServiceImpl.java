@@ -16,6 +16,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto user) {
+
+        /**
+         * 1. Замінити BeanUtils на створення об'єкту через білдер,
+         * 2. Передавати ID департменту у реквесті
+         * 3. Розібратись і додати підсолювання паролю
+         */
+
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
 
