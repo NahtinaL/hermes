@@ -20,22 +20,20 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: firstName
+                  name: first_name
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: lastName
+                  name: last_name
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: department
+                  name: department_id
                   type: BIGINT
-                  constraints:
-                    nullable: false
               - column:
-                  name: phoneNumber
+                  name: phone_number
                   type: varchar(50)
                   constraints:
                     unique: true

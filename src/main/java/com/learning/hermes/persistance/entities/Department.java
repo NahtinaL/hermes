@@ -1,14 +1,19 @@
 package com.learning.hermes.persistance.entities;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Collection;
 
+@Data
+@NoArgsConstructor
 @Entity
-@Table(name = "Departmets")
+@Table(name = "departments")
 public class Department {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer departmentId;
 
@@ -25,53 +30,6 @@ public class Department {
     private Integer weightLimit;
 
     @OneToMany(mappedBy = "department")
-    Collection<User> user;
+    Collection<UserEntity> user;
 
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public Integer getWeightLimit() {
-        return weightLimit;
-    }
-
-    public void setWeightLimit(Integer weightLimit) {
-        this.weightLimit = weightLimit;
-    }
-
-    public Collection<User> getUser() {
-        return user;
-    }
-
-    public void setUser(Collection<User> user) {
-        this.user = user;
-    }
 }

@@ -1,16 +1,21 @@
 package com.learning.hermes.persistance.entities;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "Packages")
 public class Package {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
