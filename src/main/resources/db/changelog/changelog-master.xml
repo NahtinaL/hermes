@@ -10,4 +10,5 @@
     <include  file="db/changelog/changes/1.0.3-add_foreign_keys_toUsers.sql"/>
     <include  file="db/changelog/changes/1.0.4-add_foreign_key_toPackages.sql"/>
     <include  file="db/changelog/changes/1.0.5-add_foreign_key_toPackage.sql"/>
+    <include  file="db/changelog/changes/1.0.6-add_salt_column_user_table.sql"/>
 </databaseChangeLog>

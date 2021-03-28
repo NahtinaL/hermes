@@ -18,7 +18,7 @@ public class UserController {
         userTest.setFirstName("BohdanTest");
         userTest.setLastName("Bochulia");
         userTest.setPassword("nonEcriptedpassword");
-        userTest.setPhoneNumber("8888567844444");
+        userTest.setPhoneNumber("8888844444");
         userTest.setType("creator");
         userTest.setDepartmentId(1);
 
