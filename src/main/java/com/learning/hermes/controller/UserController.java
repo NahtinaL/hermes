@@ -1,5 +1,7 @@
 package com.learning.hermes.controller;
 
+import com.learning.hermes.model.request.UserDetailRequest;
+import com.learning.hermes.model.response.UserDetailsResponse;
 import com.learning.hermes.services.UserService;
 import com.learning.hermes.shared.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +16,26 @@ public class UserController {
 
     @GetMapping
     public String getUser() {
-        UserDto userTest = new UserDto();
-        userTest.setFirstName("BohdanTest");
-        userTest.setLastName("Bochulia");
-        userTest.setPassword("nonEcriptedpassword");
-        userTest.setPhoneNumber("8888844444");
-        userTest.setType("creator");
-        userTest.setDepartmentId(1);
-
-        userService.createUser(userTest);
         return "get User was called";
     }
 
     @PostMapping
-    public String createUser() {
-        return "create User was called";
+    public UserDetailsResponse createUser(@RequestBody UserDetailRequest requestBody) {
+        UserDto userDetails = UserDto.builder()
+                .firstName(requestBody.getFirstName())
+                .lastName(requestBody.getLastName())
+                .phoneNumber(requestBody.getPhoneNumber())
+                .password(requestBody.getPassword())
+                .departmentId(Integer.parseInt(requestBody.getDepartmentId()))
+                .build();
+
+        userService.createUser(userDetails);
+        UserDetailsResponse response = UserDetailsResponse.builder()
+                .firstName(userDetails.getFirstName())
+                .lastName(userDetails.getLastName())
+                .phoneNumber(userDetails.getPhoneNumber())
+                .build();
+        return response;
     }
 
     @PutMapping

@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         Department departmentEntity = departmentRepository.findById(departmentId).orElseThrow(RuntimeException::new);
 
         UserEntity userEntity = UserEntity.builder()
-                .type(user.getType())
+                .type("customer")
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .phoneNumber(user.getPhoneNumber())
