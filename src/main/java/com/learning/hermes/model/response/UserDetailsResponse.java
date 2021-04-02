@@ -9,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDetailsResponse {
 
-    private String id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String phoneNumber;

@@ -8,9 +8,13 @@ import com.learning.hermes.services.UserService;
 import com.learning.hermes.shared.UserDto;
 import com.learning.hermes.utils.Salt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,5 +60,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
 
         return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
+       UserEntity userEntity = userRepository.findByPhoneNumber(phoneNumber);
+
+
+       if (userEntity == null) throw new UsernameNotFoundException(phoneNumber);
+        return new User(userEntity.getPhoneNumber(), userEntity.getPassword(), new ArrayList<>());
     }
 }
