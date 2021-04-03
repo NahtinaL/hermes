@@ -2,8 +2,10 @@ package com.learning.hermes.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.hermes.model.request.UserLoginRequest;
+import com.learning.hermes.services.LoginService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -34,9 +36,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             UserLoginRequest creds = new ObjectMapper()
                     .readValue(req.getInputStream(), UserLoginRequest.class);
 
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getPhoneNumber(),
-                    creds.getPassword(),
-                    new ArrayList<>()));
+            return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

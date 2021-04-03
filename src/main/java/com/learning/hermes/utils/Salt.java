@@ -49,7 +49,7 @@ public class Salt {
         byte[] binary = new byte[hex.length() / 2];
         for (int i = 0; i < binary.length; i++) {
             //Parse 2 chars from base 16 to base 2
-            binary[i] = (byte) Integer.parseInt(hex.substring(2 * 1, 2 * i + 2), 16);
+            binary[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
         }
         return binary;
     }
