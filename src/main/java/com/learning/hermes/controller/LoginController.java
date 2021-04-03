@@ -1,11 +1,8 @@
 package com.learning.hermes.controller;
 
-import com.learning.hermes.model.request.UserDetailRequest;
+
 import com.learning.hermes.model.request.UserLoginRequest;
-import com.learning.hermes.model.response.UserDetailsResponse;
 import com.learning.hermes.services.LoginService;
-import com.learning.hermes.services.UserService;
-import com.learning.hermes.shared.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
