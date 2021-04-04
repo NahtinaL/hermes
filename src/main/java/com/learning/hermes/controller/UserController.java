@@ -7,6 +7,7 @@ import com.learning.hermes.services.LoginService;
 import com.learning.hermes.services.UserService;
 import com.learning.hermes.shared.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

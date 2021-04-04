@@ -1,55 +1,40 @@
 package com.learning.hermes.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learning.hermes.model.request.UserLoginRequest;
-import com.learning.hermes.services.LoginService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
-    private final AuthenticationManager authenticationManager;
-
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
+@Component
+@RequiredArgsConstructor
+@Slf4j
+public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest req,
-                                                HttpServletResponse res) throws AuthenticationException {
-        try {
-            UserLoginRequest creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), UserLoginRequest.class);
-
-            return null;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    protected void successfulAuthentication(HttpServletRequest request,
-                                            HttpServletResponse response,
-                                            FilterChain chain,
-                                            Authentication authentication) throws IOException, ServletException {
-
-        String username = ((User) authentication.getPrincipal()).getUsername();
-
-
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+        log.info("filter!");
+        //TODO: implement
+        /**
+         * 1. Валідація JWT токена
+         * 2. У випадку успіху створюємо об'єкт Аутентифікації
+         * 3. У випадку неуспіху повертаємо 403
+         */
+        SecurityContextHolder.getContext().setAuthentication(
+                new PreAuthenticatedAuthenticationToken("phone", null, List.of(
+                        new SimpleGrantedAuthority("ROLE_" + "USER")
+                ))
+        );
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

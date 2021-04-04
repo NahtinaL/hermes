@@ -6,17 +6,19 @@ import com.learning.hermes.security.SecurityConstants;
 import com.learning.hermes.utils.Salt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Date;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class LoginService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public String login (String phoneNumber, String password) throws RuntimeException {
 
@@ -34,15 +36,16 @@ public class LoginService {
                     .setSubject(userEntity.getFirstName())
                     .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
                     .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
-                    .claim("claim", null)
+                    //coreect claim
+                    .claim("USER_TYPE", userEntity.getType())
                     .compact();
 
-            String response = (SecurityConstants.HEADER_STRING + SecurityConstants.TOKEN_PREFIX + token);
-            System.out.println(response);
-            return response;
+            //replace with log
+            log.info(token);
+            System.out.println(token);
+            return token;
         } else {
-            System.out.println("403/401");
-            return "403";
+           return null;
         }
     }
 
