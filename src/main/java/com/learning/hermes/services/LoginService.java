@@ -23,6 +23,10 @@ public class LoginService {
     public String login (String phoneNumber, String password) throws RuntimeException {
 
         UserEntity userEntity = userRepository.findByPhoneNumber(phoneNumber);
+        if (userEntity.equals(null)) {
+            log.error("User does not exist");
+            return null;
+        }
 
 
         String strOriginalSalt = userEntity.getSalt();
@@ -36,13 +40,9 @@ public class LoginService {
                     .setSubject(userEntity.getFirstName())
                     .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
                     .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
-                    //coreect claim
                     .claim("USER_TYPE", userEntity.getType())
                     .compact();
-
-            //replace with log
             log.info(token);
-            System.out.println(token);
             return token;
         } else {
            return null;
