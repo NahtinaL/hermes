@@ -6,6 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
+@Builder
 public class UserDto implements Serializable {
 
     private static final long serialVersionUID = 8L;
