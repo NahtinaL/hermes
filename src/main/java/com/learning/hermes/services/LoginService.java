@@ -1,6 +1,6 @@
 package com.learning.hermes.services;
 
-import com.learning.hermes.exceptions.UserLoginException;
+import com.learning.hermes.exceptions.UserException;
 import com.learning.hermes.model.response.ErrorMessages;
 import com.learning.hermes.persistance.entities.UserEntity;
 import com.learning.hermes.repository.UserRepository;
@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.net.http.HttpRequest;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -26,8 +25,11 @@ public class LoginService {
 
     public String login (String phoneNumber, String password) {
 
-        try {
             UserEntity userEntity = userRepository.findByPhoneNumber(phoneNumber);
+            if (userEntity == null) {
+                throw new UserException(HttpStatus.UNAUTHORIZED, ErrorMessages.AUTHENTICATION_FAILED.getErrorMessage());
+            }
+
             String strOriginalSalt = userEntity.getSalt();
             byte[] byteSalt = Salt.fromHex(strOriginalSalt);
             byte[] providedSaltedPassword = Salt.getSaltedHash(password, byteSalt);
@@ -44,11 +46,9 @@ public class LoginService {
                 log.info(token);
                 return token;
             } else {
-               return String.valueOf(HttpStatus.UNAUTHORIZED);
+                throw new UserException(HttpStatus.UNAUTHORIZED, ErrorMessages.AUTHENTICATION_FAILED.getErrorMessage());
             }
-        } catch (NullPointerException exception) {
-            throw new UserLoginException (ErrorMessages.USER_NOT_FOUND.getErrorMessage());
-        }
+
 
     }
 
