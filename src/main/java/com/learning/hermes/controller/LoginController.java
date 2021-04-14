@@ -14,11 +14,6 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @GetMapping
-    public String getUser() {
-        return "get User was called";
-    }
-
     @PostMapping
     public ResponseEntity<String> login(@RequestBody UserLoginRequest loginRequest) {
         String response = loginService.login(loginRequest.getPhoneNumber(), loginRequest.getPassword());
@@ -28,13 +23,4 @@ public class LoginController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping
-    public String updateUser() {
-        return "update User was called";
-    }
-
-    @DeleteMapping
-    public String deleteUser() {
-        return "delete user was called";
-    }
 }
