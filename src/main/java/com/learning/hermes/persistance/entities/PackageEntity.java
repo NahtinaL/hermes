@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Table(name = "Packages")
-public class Package {
+public class PackageEntity {
 
     @Id
     @Column(name = "id")

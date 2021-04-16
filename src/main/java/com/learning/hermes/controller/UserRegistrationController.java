@@ -32,12 +32,8 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDetailsResponse> userRegistration(@Valid @RequestBody UserDetailRequest requestBody,
-                                                                BindingResult bindingResult) {
+    public ResponseEntity<UserDetailsResponse> userRegistration(@Valid @RequestBody UserDetailRequest requestBody) {
 
-        if (bindingResult.hasErrors()) {
-            throw new UserException(HttpStatus.BAD_REQUEST, ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
-        }
 
         UserDto userDetails = UserDto.builder()
                 .firstName(requestBody.getFirstName())
