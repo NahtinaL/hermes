@@ -32,17 +32,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDetailsResponse> userRegistration(@Valid @RequestBody UserDetailRequest requestBody) {
-
-
-        UserDto userDetails = UserDto.builder()
-                .firstName(requestBody.getFirstName())
-                .lastName(requestBody.getLastName())
-                .phoneNumber(requestBody.getPhoneNumber())
-                .password(requestBody.getPassword())
-                .departmentId(Integer.parseInt(requestBody.getDepartmentId()))
-                .build();
-
+    public ResponseEntity<UserDetailsResponse> userRegistration(@Valid @RequestBody UserDto userDetails) {
         userService.createUser(userDetails);
         UserDetailsResponse response = UserDetailsResponse.builder()
                 .firstName(userDetails.getFirstName())

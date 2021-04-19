@@ -2,18 +2,28 @@ package com.learning.hermes.utils;
 
 
 import com.learning.hermes.model.PackageStatuses;
-import com.learning.hermes.shared.PackageDto;
 
-import java.util.Arrays;
 
 public class PackageStatusManager {
 
-    public static String assignStatus() {
-        return PackageStatuses.CREATED.getStatus();
+    public static PackageStatuses assignCreatedStatus() {
+        return PackageStatuses.CREATED;
     }
 
-    public static String changeStatus(String currentStatus) {
-        return null;
+    public static PackageStatuses assignOnWayStatus() {
+        return PackageStatuses.ON_WAY;
+    }
+
+    public static PackageStatuses assignDeliveredStatus() {
+        return PackageStatuses.DELIVERED;
+    }
+
+    public static PackageStatuses assignReceivedStatus() {
+        return PackageStatuses.RECEIVED;
+    }
+
+    public static PackageStatuses assignAbandonedStatus() {
+        return PackageStatuses.ABANDONED;
     }
 
 }

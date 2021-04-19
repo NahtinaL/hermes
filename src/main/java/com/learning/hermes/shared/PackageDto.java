@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -21,8 +22,8 @@ public class PackageDto implements Serializable {
     private String fragility;
     private Integer fee;
     private String status;
-    private Department departmentFrom;
-    private Department departmentTo;
+    private Integer departmentFrom;
+    private Integer departmentTo;
     private String senderPhone;
     private String receiverPhone;
     private Date createdDate;

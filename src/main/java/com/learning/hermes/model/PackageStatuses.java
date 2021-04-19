@@ -10,7 +10,7 @@ public enum PackageStatuses {
 
     private String status;
 
-    private PackageStatuses(String status) {
+     PackageStatuses(String status) {
         this.status = status;
     }
 

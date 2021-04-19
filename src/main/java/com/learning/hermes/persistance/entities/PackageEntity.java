@@ -1,15 +1,17 @@
 package com.learning.hermes.persistance.entities;
 
 
+import com.learning.hermes.model.PackageStatuses;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Builder
 @Entity
 @Data
-@NoArgsConstructor
 @Table(name = "Packages")
 public class PackageEntity {
 
@@ -37,7 +39,8 @@ public class PackageEntity {
     private Integer fee;
 
     @Column(nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private PackageStatuses status;
 
     @ManyToOne
     @JoinColumn(name = "department_from")

@@ -2,6 +2,7 @@ package com.learning.hermes.controller;
 
 import com.learning.hermes.model.request.PackageDetailRequest;
 import com.learning.hermes.model.response.PackageDetailsResponce;
+import com.learning.hermes.persistance.entities.PackageEntity;
 import com.learning.hermes.services.PackageService;
 import com.learning.hermes.shared.PackageDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,8 @@ public class PackageController {
     }
 
     @PostMapping
-    public ResponseEntity<PackageDetailsResponce> createPackage(@Valid @RequestBody PackageDetailRequest requestBody) {
-        PackageDto packageDto = PackageDto.builder()
-                .name(requestBody.getName())
-                .weight(requestBody.getWeight())
-                .fragility(requestBody.getFragility())
-                .departmentTo(requestBody.getDepartmentTo())
-                .senderPhone(requestBody.getSenderPhone())
-                .receiverPhone(requestBody.getReceiverPhone()).build();
-
-        packageService.createPackage(packageDto);
-        PackageDetailsResponce packageDetailsResponce = PackageDetailsResponce.builder().build();
+    public ResponseEntity<PackageDto> createPackage(@Valid @RequestBody PackageDto packageDetails) {
+        PackageDto packageDetailsResponce = packageService.createPackage(packageDetails);
         return new ResponseEntity<>(packageDetailsResponce, new HttpHeaders(), HttpStatus.ACCEPTED);
     }
 

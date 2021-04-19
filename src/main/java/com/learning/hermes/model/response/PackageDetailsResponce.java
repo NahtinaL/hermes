@@ -9,7 +9,6 @@ import java.util.Date;
 
 @Builder
 @Data
-@NoArgsConstructor
 public class PackageDetailsResponce {
 
     private String ttn;
@@ -19,8 +18,8 @@ public class PackageDetailsResponce {
     private String fragility;
     private Integer fee;
     private String status;
-    private Department departmentFrom;
-    private Department departmentTo;
+    private Integer departmentFrom;
+    private Integer departmentTo;
     private String senderPhone;
     private String receiverPhone;
     private Date createdDate;

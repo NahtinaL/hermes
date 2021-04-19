@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/login/**", "/registration/**");
+        web.ignoring().antMatchers("/login/**", "/registration/**", "/package/**");
     }
 
     @Override
