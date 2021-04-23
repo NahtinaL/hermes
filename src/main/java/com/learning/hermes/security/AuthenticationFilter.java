@@ -27,8 +27,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         log.info("filter!");
+        Claims claims;
         try {
-            Claims claims = Jwts.parser()
+            claims = Jwts.parser()
                     .setSigningKey(DatatypeConverter.parseBase64Binary(SecurityConstants.TOKEN_SECRET))
                     .parseClaimsJws(httpServletRequest.getHeader(SecurityConstants.HEADER_STRING)).getBody();
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
          * 3. У випадку неуспіху повертаємо 403
          */
         SecurityContextHolder.getContext().setAuthentication(
-                new PreAuthenticatedAuthenticationToken("phone", null, List.of(
+                new PreAuthenticatedAuthenticationToken(claims.get("phone"), null, List.of(
                         new SimpleGrantedAuthority("ROLE_" + "USER")
                 ))
         );

@@ -1,8 +1,5 @@
 package com.learning.hermes.controller;
 
-import com.learning.hermes.exceptions.UserException;
-import com.learning.hermes.model.request.UserDetailRequest;
-import com.learning.hermes.model.response.ErrorMessages;
 import com.learning.hermes.model.response.UserDetailsResponse;
 import com.learning.hermes.services.UserService;
 import com.learning.hermes.shared.UserDto;
@@ -10,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

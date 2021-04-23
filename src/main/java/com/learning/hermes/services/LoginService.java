@@ -42,6 +42,7 @@ public class LoginService {
                         .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
                         .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
                         .claim("USER_TYPE", userEntity.getType())
+                        .claim("phone", userEntity.getPhoneNumber())
                         .compact();
                 log.info(token);
                 return token;
