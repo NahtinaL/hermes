@@ -5,6 +5,7 @@ import com.learning.hermes.shared.PackageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.AuthenticatedPrincipal;
@@ -21,8 +22,9 @@ public class PackageController {
     @Autowired
     PackageService packageService;
 
-    @GetMapping
-    public String getPackage() {
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getPackage(@RequestParam (value = "ttn") String ttn) {
+        packageService.packageFiltering(ttn);
         return "";
     }
 

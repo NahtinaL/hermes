@@ -1,24 +1,23 @@
 package com.learning.hermes.services;
 
-import com.learning.hermes.model.PackageStatuses;
 import com.learning.hermes.persistance.entities.PackageEntity;
 import com.learning.hermes.repository.DepartmentRepository;
-import com.learning.hermes.repository.PachageRepository;
+import com.learning.hermes.repository.PackageRepository;
 import com.learning.hermes.shared.PackageDto;
 import com.learning.hermes.utils.PackageStatusManager;
 import com.learning.hermes.utils.TtnGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
+
+import static com.learning.hermes.services.specifications.PackageSpecs.getPackageByTtn;
 
 @Service
 public class PackageService {
 
     @Autowired
-    PachageRepository packageRepository;
+    PackageRepository packageRepository;
 
     @Autowired
     DepartmentRepository departmentRepository;
@@ -46,5 +45,12 @@ public class PackageService {
         packageDto.setTtn(packageEntity.getTtn());
         packageDto.setStatus(packageEntity.getStatus().toString());
         return packageDto;
+    }
+
+    public List <PackageEntity> packageFiltering(String ttn) {
+
+       List<PackageEntity> packages = packageRepository.findAll(getPackageByTtn(ttn));
+        System.out.println("");
+       return packages;
     }
 }
