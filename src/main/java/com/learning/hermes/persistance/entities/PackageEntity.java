@@ -2,13 +2,15 @@ package com.learning.hermes.persistance.entities;
 
 
 import com.learning.hermes.model.PackageStatuses;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 @Data
@@ -65,5 +67,6 @@ public class PackageEntity {
 
     @Column
     private String receivedDate;
+
 
 }

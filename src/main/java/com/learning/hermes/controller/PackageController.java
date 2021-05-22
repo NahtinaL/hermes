@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/packages")
@@ -23,9 +24,9 @@ public class PackageController {
     PackageService packageService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getPackage(@RequestParam (value = "ttn") String ttn) {
-        packageService.packageFiltering(ttn);
-        return "";
+    public List<PackageDto> getPackage(@RequestBody String ttn, String senderPhone, String receiverPhone, String status, String createdDate) {
+       List <PackageDto> response = packageService.findPackages(null, "1233223", null, null, null);
+       return response;
     }
 
     @PostMapping

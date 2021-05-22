@@ -7,11 +7,15 @@ import com.learning.hermes.shared.PackageDto;
 import com.learning.hermes.utils.PackageStatusManager;
 import com.learning.hermes.utils.TtnGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.learning.hermes.services.specifications.PackageSpecs.getPackageByTtn;
+import static com.learning.hermes.services.specifications.PackageSpecs.packageFiltering;
+
 
 @Service
 public class PackageService {
@@ -28,7 +32,7 @@ public class PackageService {
                 .ttn(TtnGenerator.generate())
                 .name(packageDto.getName())
 //                Create cost calculation
-                .cost(100)
+                .cost(1)
                 .weight(packageDto.getWeight())
                 .fragility(packageDto.getFragility())
                 .fee(packageDto.getFee())
@@ -47,10 +51,26 @@ public class PackageService {
         return packageDto;
     }
 
-    public List <PackageEntity> packageFiltering(String ttn) {
+    public List<PackageDto> findPackages (String ttn, String senderPhone, String receiverPhone, String status, String createdDate) {
+        List<PackageEntity> filteredPackages = packageRepository.findAll(packageFiltering (ttn, senderPhone, receiverPhone, status, createdDate));
+        List<PackageDto> packageDtoList = filteredPackages.stream().map(p -> {PackageDto packageDto = PackageDto.builder()
+                .ttn(p.getTtn())
+                .name(p.getName())
+                .cost(p.getCost())
+                .weight(p.getWeight())
+                .fragility(p.getFragility())
+                .fee(p.getFee())
+                .status(p.getStatus().toString())
+                .departmentFrom(p.getDepartmentFrom().getDepartmentId())
+                .departmentTo(p.getDepartmentTo().getDepartmentId())
+                .senderPhone(p.getSenderPhone())
+                .receiverPhone(p.getReceiverPhone())
+                .createdDate(p.getCreatedDate())
+                .deliverDate(p.getDeliverDate())
+                .receivedDate(p.getReceivedDate()).build();
+                return packageDto;}).collect(Collectors.toList());
 
-       List<PackageEntity> packages = packageRepository.findAll(getPackageByTtn(ttn));
-        System.out.println("");
-       return packages;
+        return packageDtoList;
     }
+
 }
