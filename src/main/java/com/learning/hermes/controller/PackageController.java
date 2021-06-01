@@ -25,7 +25,8 @@ public class PackageController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PackageDto> getPackage(@RequestBody String ttn, String senderPhone, String receiverPhone, String status, String createdDate) {
-       List <PackageDto> response = packageService.findPackages(null, "1233223", null, null, null);
+       List <PackageDto> response = packageService.findPackages(ttn, senderPhone, receiverPhone, status,createdDate);
+//       List <PackageDto> response = packageService.findPackages("", "11111", "22222", "", "");
        return response;
     }
 
