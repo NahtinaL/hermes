@@ -10,3 +10,9 @@ Package Service
 
 Fee calculation
 Scheduled async job
+
+Fee Calculations
+1. Create In Separate Service
+2. Scheduled each day at 8 P.M
+3. Logic: For each package that in status=Delivered we calculating fee (getting from proprties file)
+Condition: Fee calculation must start from 3d day of packcage keeping.
